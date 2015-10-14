@@ -1,0 +1,760 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+
+
+  <meta name="keywords" content="Connect,Node.js,中间件," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yizhao He's Notes" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="connect简介
+Connect is a middleware framework for node.
+
+Connect 是 nodejs 的中间件框架。何为中间件？中间件就是用户请求和返回结果之间的一个又一个筛选工具。正如 @Luics 所说“如果把一个http处理过程比作是污水处理，中间件就像是一层层的过滤网。”
+中间件能在请求用户请求处理之前，进行一些预处理，而在返回结果之前，又进行一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何编写一个connect中间件">
+<meta property="og:url" content="http://1mhz.me/2014/how-to-code-a-connect-middle-ware/index.html">
+<meta property="og:site_name" content="Yizhao He's Notes">
+<meta property="og:description" content="connect简介
+Connect is a middleware framework for node.
+
+Connect 是 nodejs 的中间件框架。何为中间件？中间件就是用户请求和返回结果之间的一个又一个筛选工具。正如 @Luics 所说“如果把一个http处理过程比作是污水处理，中间件就像是一层层的过滤网。”
+中间件能在请求用户请求处理之前，进行一些预处理，而在返回结果之前，又进行一些">
+<meta property="og:image" content="http://1mhz.me/images/2014/middleware_flow.png">
+<meta property="og:image" content="http://1mhz.me/images/2014/connect-ssiinclude-flow.png">
+<meta property="og:updated_time" content="2015-10-08T18:04:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何编写一个connect中间件">
+<meta name="twitter:description" content="connect简介
+Connect is a middleware framework for node.
+
+Connect 是 nodejs 的中间件框架。何为中间件？中间件就是用户请求和返回结果之间的一个又一个筛选工具。正如 @Luics 所说“如果把一个http处理过程比作是污水处理，中间件就像是一层层的过滤网。”
+中间件能在请求用户请求处理之前，进行一些预处理，而在返回结果之前，又进行一些">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 如何编写一个connect中间件 // Yizhao He's Notes </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Yizhao He's Notes</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+<form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'TKRNhyNuSjyNHnq5Ghyo','2.0.0');
+</script>
+
+<div class="site-search-toggle"></div>
+    </div>
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              如何编写一个connect中间件
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-07-12T21:20:00-07:00" content="2014-07-12">
+            2014-07-12
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2014/how-to-code-a-connect-middle-ware/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/how-to-code-a-connect-middle-ware/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="connect简介">connect简介</h1><blockquote>
+<p>Connect is a middleware framework for node.</p>
+</blockquote>
+<p>Connect 是 nodejs 的中间件框架。何为中间件？中间件就是用户请求和返回结果之间的一个又一个筛选工具。正如 <a href="http://weibo.com/777865156?topnav=1&amp;wvr=5&amp;topsug=1" target="_blank" rel="external">@Luics</a> 所说“如果把一个http处理过程比作是污水处理，中间件就像是一层层的过滤网。”</p>
+<p>中间件能在请求用户请求处理之前，进行一些预处理，而在返回结果之前，又进行一些返回之前的处理。非常类似于洋葱模型，一层一层的进入，又一层一层的退出。</p>
+<a id="more"></a>
+<p>Connect中间件的处理流程如下：</p>
+<p><img src="/images/2014/middleware_flow.png" alt="connect处理流程"></p>
+<p>nodejs 中，http server 有两个参数传入，分别是 request 和 response 代表请求和响应结果，这两个参数也会被传入中间件中。此外，connect 中间件还有第三个参数：next 函数。通常使用该参数的方法是：<code>next();</code> 。因此大家常认为 next 代表下一个中间件函数，但事实上，next 只是 connect 生成的一个函数，它的作用是告诉 connect 可以调用下一个中间件来处理 request 和 response 了。如果下一个中间件，则调用，如果不存在，就没有调用了。</p>
+<p><strong>参考:</strong>更多关于 conncet 的介绍请访问以下链接：</p>
+<ol>
+<li><a href="https://github.com/senchalabs/connect" target="_blank" rel="external">connect github page</a></li>
+<li><a href="http://www.senchalabs.org/connect/" target="_blank" rel="external">connect doc page</a></li>
+<li><a href="http://www.cnblogs.com/luics/archive/2012/11/28/2775206.html" target="_blank" rel="external">Luics 天猫鬼道 connect简介</a></li>
+<li><a href="http://blog.fens.me/nodejs-connect/" target="_blank" rel="external">connct 内置中间件介绍</a></li>
+<li><a href="http://www.infoq.com/cn/articles/nodejs-connect-module" target="_blank" rel="external">深入浅出Node.js：Connect模块解析一</a></li>
+<li><a href="http://www.infoq.com/cn/articles/nodejs-8-connect-module-part-2" target="_blank" rel="external">深入浅出Node.js：Connect模块解析二</a></li>
+</ol>
+<h1 id="一个简单的目标">一个简单的目标</h1><p>看完简介和一些深入的介绍之后，我们就可以开始着手做一个自己的中间件来方便我们的 web 开发了。</p>
+<blockquote>
+<p>实践才是最好的老师，不踩坑就不能深入理解。</p>
+</blockquote>
+<h2 id="需求">需求</h2><p>现在笔者有这么一个需求：在本地进行 demo 页面开发的时候，对静态页面进行模块式开发，实现 html 页面之间的引用。譬如，做一个公用的 header 或者 footer ，以便其他页面进行引用。</p>
+<h2 id="问题">问题</h2><p>在没有 nodejs 之前，可以通过对 Apache 服务器进行一些配置，以支持 `<a href="http://en.wikipedia.org/wiki/Server_Side_Includes" target="_blank" rel="external">SSI(Server Side Include)</a>‘ 命令。通过类似</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="comment">&lt;!--#include virtual="./mod/header.html"--&gt;</span>`</span><br></pre></td></tr></table></figure>
+<p>的命令来实现引用。</p>
+<p>现在在 nodejs 环境下开发，就没有了这种支持。所以我们要自己动手，丰衣足食。没有的，我们就自己创造工具。</p>
+<h1 id="功能、接口设计">功能、接口设计</h1><h2 id="功能">功能</h2><p>要实现的功能非常简单——当服务器收到对 html 文件的请求时，将请求的 html 文件中的类似 <code>&lt;!--#include virtual=&quot;./mod/header.html&quot;--&gt;</code> 的字符串替换成对应模块的 html 代码，然后将请求的内容返回给浏览器。</p>
+<p>流程图如下：</p>
+<p><img src="/images/2014/connect-ssiinclude-flow.png" alt="connect-ssiinclude 流程图"></p>
+<h2 id="接口">接口</h2><p>中间件的接口，即为中间件调用者可以配置的参数。通过参数配置来使中间件正常工作，和动态定制。</p>
+<p>这里我们需要考虑几个问题：</p>
+<ol>
+<li>获取到 url 请求后，怎么访问到被请求的 html 文件？</li>
+<li>怎么访问到该 html 文件中所  <code>#include</code> 的文件？</li>
+<li>文件编码会影响吗？</li>
+<li>是否需要输出 debug 信息？</li>
+</ol>
+<p>以上几个问题是从功能设计中的流程图所分析出来的，也是我们实际编码时必须要解决的问题。</p>
+<ol>
+<li>针对问题1，我们可以在 connect 中调用本中间件时传入 html  文件的根目录，然后解析请求 url 中请求的 html 文件名，两者组装起来，就是文件系统中该 html 文件的路径了，使用 nodejs 的 fs 模块可以访问到</li>
+<li>针对问题2，<code>#include</code> 中的被引用 html 文件路径通常是相对于引用 html的，所以我们可以将应用 html文件路径和被应用文件的路径组合起来即可</li>
+<li>针对问题3，这个问题其实是实际开发时遇到的问题，以后开发需要注意这一点。因为涉及到文件的读写和处理，所以需要指定文件编码</li>
+<li>可以通过参数进行配置</li>
+</ol>
+<p>综合上面几点，我们可以拟定以下接口：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 传入中间件的配置对象option:</span><br><span class="line">var option = &#123;</span><br><span class="line">    root		:  <span class="string">"the root path of the requested html file"</span>,  // required, <span class="keyword">default</span> <span class="keyword">to</span> <span class="string">''</span></span><br><span class="line">    encoding	: <span class="string">"your encoding charset"</span>,  // <span class="literal">not</span> required, <span class="keyword">default</span> <span class="keyword">to</span> <span class="string">'utf8'</span></span><br><span class="line">    print		: <span class="string">"boolean, whether to print the include information"</span> // required, <span class="keyword">default</span> <span class="keyword">to</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="代码实现">代码实现</h1><h2 id="代码组织">代码组织</h2><p>中间件都是node的扩展模块，好的模块应该有清晰的代码组织方式。我们可以参考一下 connect、express等模块的组织方式，通常都是采用以下结构：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> moduleName/</span><br><span class="line"></span>	-<span class="ruby"> lib/</span><br><span class="line"></span>		-<span class="ruby"> file.js</span><br><span class="line"></span>	-<span class="ruby"> node_modules/</span><br><span class="line"></span>		-<span class="ruby"> modulesInstalled</span><br><span class="line"></span>	-<span class="ruby"> index.js</span><br><span class="line"></span>	-<span class="ruby"> package.json</span><br><span class="line"></span>	-<span class="ruby"> <span class="constant">README</span>.md</span></span><br></pre></td></tr></table></figure>
+<p>即采用</p>
+<ul>
+<li>lib 目录存放模块的核心代码</li>
+<li>node_modules 目录存储依赖的模块</li>
+<li>index.js 文件暴露模块的接口</li>
+<li>package.json 文件来配置模块信息</li>
+<li>README.md 文件对模块的使用进行说明</li>
+</ul>
+<h2 id="package-json">package.json</h2><p>设置模块名称、介绍、版本、依赖的模块信息等等，由于本中间件全部采用 nodejs 内置模块，因此没有设置模块依赖  <code>dependencies</code> 。</p>
+<p>在这里，我给我的模块去了一个名字：<code>connect-ssiinclude</code> ，标识它是一个基于 connect 的中间件，作用是支持 ssi 命令中的 include 。</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"connect-ssiinclude"</span>,</span><br><span class="line">    <span class="string">"description"</span>: <span class="string">"enable ssi include in html and shtml files"</span>,</span><br><span class="line">    <span class="string">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">    <span class="string">"author"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"qishang"</span>,</span><br><span class="line">        <span class="string">"email"</span>: <span class="string">"heyizhaobupt@gmail.com"</span>,</span><br><span class="line">        <span class="string">"url"</span>: <span class="string">"http://1mhz.me"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"keywords"</span>: [</span><br><span class="line">        <span class="string">"connect"</span>,</span><br><span class="line">        <span class="string">"middle ware"</span>,</span><br><span class="line">        <span class="string">"ssi"</span>,</span><br><span class="line">        <span class="string">"include"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"repository"</span>: &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"git"</span>,</span><br><span class="line">        <span class="string">"url"</span>: <span class="string">"https://github.com/dukewan/connect-ssiInclude.git"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更多关于 package.json 的配置见：<a href="https://www.npmjs.org/doc/files/package.json.html" target="_blank" rel="external">npm doc package.json</a></p>
+<h2 id="index-js">index.js</h2><p>nodejs 的模块系统的机制是，模块引用时，默认读取模块目录下的 index.js，即 index.js 能暴露出模块的公有接口。这样在自己的程序中，引用模块时，只需要指定模块目录的路径就行了，不用关心模块的核心代码在哪里。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="built_in">require</span>(<span class="string">'./lib/include'</span>);</span><br></pre></td></tr></table></figure>
+<p>该文件只有一行代码，就是 require 模块的核心代码。</p>
+<h2 id="lib/include-js">lib/include.js</h2><p>这个文件就是核心代码所在了，我们需要在这里实现上面流程图中的所有逻辑。下面我们来解析下实现过程：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 内置模块的引用，分别为文件系统模块fs，路径处理模块path，url模块等</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 这个模块暴露了一个方法，这个方法的调用会返回一个处理函数(见下面，return 处)，</span><br><span class="line"> * 用于接收connect传入的 req ,  res ,  next 参数并进行处理、返回</span><br><span class="line"> */</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 对传入模块的配置对象 option 进行处理，设置默认参数等</span></span><br><span class="line">    <span class="keyword">var</span> option = option || &#123;&#125;;</span><br><span class="line">    option.root = option.root || <span class="string">''</span>;</span><br><span class="line">    option.encoding = option.encoding || <span class="string">'utf8'</span>;</span><br><span class="line">    option.debug = option.debug || <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> reqUrl = req.url,						<span class="comment">// 请求链接</span></span><br><span class="line">            pathname = url.parse(reqUrl).pathname,	<span class="comment">// 请求链接的路径部分</span></span><br><span class="line">            file = option.root + pathname,			<span class="comment">// 被请求的文件路径</span></span><br><span class="line">            reg = <span class="regexp">/&lt;!--#include virtual="(.+)"--&gt;/g</span>,	<span class="comment">// include 命令正则</span></span><br><span class="line">            includes,								<span class="comment">// 匹配出来的 include 数组，</span></span><br><span class="line">            count = <span class="number">0</span>,								<span class="comment">// include 的次数</span></span><br><span class="line">            content = <span class="string">""</span>;							<span class="comment">// 要返回的内容</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 对要处理的请求进行筛选，不是请求的html文件则直接进入下一个中间件</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="regexp">/\w+\.s*htm/</span>.test(pathname) === <span class="literal">false</span>) &#123;</span><br><span class="line">            next();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(fs.existsSync(path.normalize(file))) &#123;</span><br><span class="line">        	<span class="comment">// 输出调试信息</span></span><br><span class="line">            <span class="keyword">if</span> (option.debug) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'#connect-include =&gt; request url:'</span> + reqUrl);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'#connect-include =&gt; pathname:'</span> + pathname);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'#connect-include =&gt; file:'</span> + file);</span><br><span class="line">            &#125;</span><br><span class="line">			<span class="comment">// 读取请求的 html 文件</span></span><br><span class="line">            content = (<span class="built_in">String</span>)(fs.readFileSync(path.normalize(file), &#123;encoding: option.encoding&#125;));</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 采用正则匹配该 html 中是否包含 inlcude 命令</span></span><br><span class="line">            <span class="keyword">while</span> ((includes = reg.exec(content)) !== <span class="literal">null</span>) &#123;</span><br><span class="line">                option.debug &amp;&amp; <span class="built_in">console</span>.log(<span class="string">'#connect-include =&gt; include :'</span> + includes[<span class="number">0</span>]);</span><br><span class="line">                count++;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> includePath = path.normalize(file + <span class="string">'/../'</span> + includes[<span class="number">1</span>]); <span class="comment">// 被 include 的文件路径</span></span><br><span class="line">                <span class="keyword">if</span>(fs.existsSync(path.normalize(includePath))) &#123;</span><br><span class="line">                	<span class="comment">// 替换 include 命令为 文件内容</span></span><br><span class="line">                    <span class="keyword">var</span> includeContent = fs.readFileSync(includePath, &#123;encoding: option.encoding&#125;);</span><br><span class="line">                    content = content.replace(includes[<span class="number">0</span>], includeContent);</span><br><span class="line">                    option.debug &amp;&amp; <span class="built_in">console</span>.log(<span class="string">'#connect-include =&gt; include file:'</span> + includePath);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!count) &#123; <span class="comment">// 没有 include 过，则直接进入下一个中间件</span></span><br><span class="line">            next();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 返回经过组装的被请求的 html 内容</span></span><br><span class="line">        res.end(content);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="中间件发布">中间件发布</h1><p>写完了核心代码，经过测试，就能够进行中间件发布了，让全世界的小伙伴都能用到我们的中间件。</p>
+<p>要发布一个中间件，我们需要做下面这几件事：</p>
+<h2 id="README-md">README.md</h2><blockquote>
+<p>一个完整的开源项目需要完善的文档说明。</p>
+</blockquote>
+<p>我们不能写了代码就不管了，我们还需要教别人怎么用我们的代码，因此我们至少得写一个<code>README.md</code>，对模块的安装、使用、配置进行简要的说明。如果模块比较复杂的话，我们还需要专门建一个 doc 目录，为使用细节撰写说明文档。广受欢迎的开源项目都是这么做的。</p>
+<p>下面是 connect-ssiinclude 的 README.md 文件内容：</p>
+<h3 id="connect-ssiinclude">connect-ssiinclude</h3><p>A middle ware for enable ssi include patterns in your html and shtml files. It’s very useful during developments when<br>you write html files in the way of modules.</p>
+<p>It will replace pattern like <code>&lt;!--#include virtual=&quot;./mod/header.html&quot;--&gt;</code> with the actual header.html file and transfer<br>to your browser.</p>
+<h3 id="Install">Install</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="operator"><span class="keyword">install</span> <span class="comment">--save connect-ssiinclude</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="Usage">Usage</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="preprocessor"><span class="keyword">include</span> = require('connect-ssiinclude');</span></span><br><span class="line">app.<span class="keyword">use</span>(<span class="preprocessor"><span class="keyword">include</span>(&#123;root: __dirname&#125;));</span></span><br></pre></td></tr></table></figure>
+<h3 id="Option">Option</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">include(option) // <span class="operator"><span class="keyword">use</span> a <span class="keyword">option</span> <span class="keyword">object</span> <span class="keyword">to</span> config <span class="keyword">connect</span>-<span class="keyword">include</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    root: __dirname,</span><br><span class="line">    <span class="keyword">encoding</span>: <span class="string">"your encoding charset"</span>, // <span class="keyword">default</span> <span class="keyword">to</span> <span class="string">'utf8'</span></span><br><span class="line">    print: <span class="string">"whether to print the include information"</span> // <span class="keyword">default</span> <span class="keyword">to</span> <span class="string">'false'</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="在_npm_上发布">在 npm 上发布</h2><p>所有代码和文档准备好之后，我们就可以发布中间件了。发布到哪？<a href="https://www.npmjs.org/" target="_blank" rel="external">npm( node package manager ，node包管理器)</a>。</p>
+<h3 id="安装">安装</h3><p>unix 下安装： 见 <a href="https://github.com/npm/npm#fancy-install-unix" target="_blank" rel="external">npm github page</a></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -L http<span class="variable">s:</span>//npmjs.org/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+<h3 id="npm_adduser">npm adduser</h3><p>首次发布之前需要创建 npm 用户，需要在终端运行：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">npm</span> adduser</span><br></pre></td></tr></table></figure>
+<p>根据指示进行输入以完成创建。</p>
+<h3 id="npm_publish">npm publish</h3><p>创建好用户之后就可以发布了，终端运行：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>npm publish path/to/your/<span class="class"><span class="keyword">module</span>     // 指定你的模块文件夹路径</span></span><br></pre></td></tr></table></figure>
+<p>可能会出现你的模块名称已经被别人使用了等等问题，按照报错进行修改即可。</p>
+<h1 id="大功告成！">大功告成！</h1><p>不出意外，现在你已经成功编写并在npm上发布了一个connect中间件了。</p>
+<p>撒花～</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Connect/" rel="tag">#Connect</a>
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+            <a href="/tags/中间件/" rel="tag">#中间件</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/get-gre-word-list-tapes/" rel="prev">使用 nodejs 批量下载红宝书音频</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/ali-summer-intern-day1/" rel="next">2014 Alibaba Summer Intern Day 1</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+                  <div class="ds-thread" data-thread-key="2014/how-to-code-a-connect-middle-ware/"
+                       data-title="如何编写一个connect中间件" data-url="http://1mhz.me/2014/how-to-code-a-connect-middle-ware/">
+                  </div>
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="Yizhao He" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Yizhao He</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dukewan" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2614346207" target="_blank">weibo</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#connect简介"><span class="nav-number">1.</span> <span class="nav-text">connect简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个简单的目标"><span class="nav-number">2.</span> <span class="nav-text">一个简单的目标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">2.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.2.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#功能、接口设计"><span class="nav-number">3.</span> <span class="nav-text">功能、接口设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能"><span class="nav-number">3.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">3.2.</span> <span class="nav-text">接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">4.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码组织"><span class="nav-number">4.1.</span> <span class="nav-text">代码组织</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#package-json"><span class="nav-number">4.2.</span> <span class="nav-text">package.json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#index-js"><span class="nav-number">4.3.</span> <span class="nav-text">index.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lib/include-js"><span class="nav-number">4.4.</span> <span class="nav-text">lib/include.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中间件发布"><span class="nav-number">5.</span> <span class="nav-text">中间件发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#README-md"><span class="nav-number">5.1.</span> <span class="nav-text">README.md</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-ssiinclude"><span class="nav-number">5.1.1.</span> <span class="nav-text">connect-ssiinclude</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install"><span class="nav-number">5.1.2.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">5.1.3.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Option"><span class="nav-number">5.1.4.</span> <span class="nav-text">Option</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在_npm_上发布"><span class="nav-number">5.2.</span> <span class="nav-text">在 npm 上发布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">5.2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm_adduser"><span class="nav-number">5.2.2.</span> <span class="nav-text">npm adduser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm_publish"><span class="nav-number">5.2.3.</span> <span class="nav-text">npm publish</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大功告成！"><span class="nav-number">6.</span> <span class="nav-text">大功告成！</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp;  2014 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yizhao He</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"1mhz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>
