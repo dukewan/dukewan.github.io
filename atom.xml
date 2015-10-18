@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://1mhz.me/"/>
-  <updated>2015-10-15T18:30:12.000Z</updated>
+  <updated>2015-10-18T00:59:30.000Z</updated>
   <id>http://1mhz.me/</id>
   
   <author>
@@ -13,6 +13,92 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Leetcode #198 House Robber]]></title>
+    <link href="http://1mhz.me/2015/leetcode-198-house-robber/"/>
+    <id>http://1mhz.me/2015/leetcode-198-house-robber/</id>
+    <published>2015-10-18T00:37:28.000Z</published>
+    <updated>2015-10-18T00:59:30.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight <strong>without alerting the police</strong>.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Analysis">Analysis</h1><p>动态规划问题。</p>
+<p>设对于 n 个房子，能抢到的最大金钱数为 OPT(n)，每栋房子 i 的价值为 Vi。</p>
+<h2 id="递归公式">递归公式</h2><p>对于一栋房子来说，只有两个选择，抢或者不抢。</p>
+<ol>
+<li>抢： OPT(n) = Vn + OPT(n - 2)</li>
+<li>不抢： OPT(n) = OPT(n - 1)</li>
+</ol>
+<p>也就是，如果抢了 n, 那么最多只能抢 n 前面的第二家；如果没抢 n，那么可以抢 n 前面的那一家。</p>
+<h2 id="初始化">初始化</h2><ol>
+<li>n = 0，钱数为 0</li>
+<li>n = 1，钱数为第一家的钱数</li>
+<li>n = 2，钱数为第一家和第二家中钱数最大者</li>
+</ol>
+<h1 id="Solution">Solution</h1><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * <span class="constant">@param</span> &#123;<span class="built_in">number</span>[]&#125; nums</span><br><span class="line"> * <span class="constant">@return</span> &#123;<span class="built_in">number</span>&#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">function rob(nums) &#123;</span><br><span class="line">	var length = nums.length<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> nums[<span class="number">0</span>]<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	var <span class="built_in">opt</span> = []<span class="comment">;</span></span><br><span class="line">	<span class="built_in">opt</span>[<span class="number">0</span>] = nums[<span class="number">0</span>],</span><br><span class="line">	<span class="built_in">opt</span>[<span class="number">1</span>] = Math.<span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (var i = <span class="number">2</span><span class="comment">; i &lt; length; i++) &#123;</span></span><br><span class="line">		<span class="built_in">opt</span>[i] = Math.<span class="built_in">max</span>(nums[i] + <span class="built_in">opt</span>[i - <span class="number">2</span>], <span class="built_in">opt</span>[i - <span class="number">1</span>])<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">opt</span>[length - <span class="number">1</span>]<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight <strong>without alerting the police</strong>.</p>
+</blockquote>]]>
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://1mhz.me/tags/Algorithm/"/>
+    
+      <category term="Dynamic Programming" scheme="http://1mhz.me/tags/Dynamic-Programming/"/>
+    
+      <category term="JavaScript" scheme="http://1mhz.me/tags/JavaScript/"/>
+    
+      <category term="Leetcode" scheme="http://1mhz.me/tags/Leetcode/"/>
+    
+      <category term="Leetcode in JS" scheme="http://1mhz.me/categories/Leetcode-in-JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Leetcode #70 Climb Stairs]]></title>
+    <link href="http://1mhz.me/2015/leetcode-70-climb-stairs/"/>
+    <id>http://1mhz.me/2015/leetcode-70-climb-stairs/</id>
+    <published>2015-10-17T22:38:29.000Z</published>
+    <updated>2015-10-18T00:56:30.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
+<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Analysis">Analysis</h1><p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/70-notes.png-small" alt="分析"></p>
+<h1 id="Solution">Solution</h1><h2 id="Solution_1_Recusive_Version">Solution 1 Recusive Version</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number&#125; n</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Dynamic Programming - Memorized Recursive Version</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> W = [0, 1, 2];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> climbStairs = function(<span class="keyword">n</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (W[<span class="keyword">n</span>] === undefined)&#123;</span><br><span class="line">		W[<span class="keyword">n</span>] = climbStairs(<span class="keyword">n</span> - 2) + climbStairs(<span class="keyword">n</span> - 1);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> W[<span class="keyword">n</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>递归方式运行时间:</p>
+<p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/70-runtime1.png-small" alt="递归方式运行时间"></p>
+<h2 id="Solution_2_Loop_Version">Solution 2 Loop Version</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@param</span> &#123;number&#125; n</span><br><span class="line"> * <span class="doctag">@return</span> &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Dynamic Programming - Loop Version</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> climbStairs = <span class="function"><span class="keyword">function</span><span class="params">(n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> W = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		W[i] = W[i - <span class="number">2</span>] + W[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> W[n];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>循环方式运行时间:</p>
+<p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/70-runtime2.png-small" alt="循环方式运行时间"></p>
+<h2 id="性能分析">性能分析</h2><p>理论上循环是比递归快的，因为同样是线性时间复杂度，递归调用需要频繁的进行栈操作，而循环不需要。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
+<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+</blockquote>]]>
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://1mhz.me/tags/Algorithm/"/>
+    
+      <category term="Dynamic Programming" scheme="http://1mhz.me/tags/Dynamic-Programming/"/>
+    
+      <category term="JavaScript" scheme="http://1mhz.me/tags/JavaScript/"/>
+    
+      <category term="Leetcode" scheme="http://1mhz.me/tags/Leetcode/"/>
+    
+      <category term="Leetcode in JS" scheme="http://1mhz.me/categories/Leetcode-in-JS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Percolate Coding Challenge - Funky Rolodex]]></title>

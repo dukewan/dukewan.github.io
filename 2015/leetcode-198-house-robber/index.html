@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="Algorithm,Dynamic Programming,JavaScript,Leetcode," />
 
 
 
@@ -37,22 +37,19 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="上一次写博还是1年前的事了，懒惰让我停止了更新。
-随着接触的技术的增多，发现前端水真是很深，代码的世界是如此美妙。我得加快步伐，追赶他们了，这个博客，也是我的每一步的见证。希望通过写文章的形式，反思、咀嚼、吸收的知识，传播技术。
-这也算是一种重生吧。">
+<meta name="description" content="Problem Description
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Reborn">
-<meta property="og:url" content="http://1mhz.me/2014/reborn/index.html">
+<meta property="og:title" content="Leetcode #198 House Robber">
+<meta property="og:url" content="http://1mhz.me/2015/leetcode-198-house-robber/index.html">
 <meta property="og:site_name" content="Yizhao He's Notes">
-<meta property="og:description" content="上一次写博还是1年前的事了，懒惰让我停止了更新。
-随着接触的技术的增多，发现前端水真是很深，代码的世界是如此美妙。我得加快步伐，追赶他们了，这个博客，也是我的每一步的见证。希望通过写文章的形式，反思、咀嚼、吸收的知识，传播技术。
-这也算是一种重生吧。">
-<meta property="og:updated_time" content="2015-10-08T18:04:31.000Z">
+<meta property="og:description" content="Problem Description
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is">
+<meta property="og:updated_time" content="2015-10-18T00:59:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Reborn">
-<meta name="twitter:description" content="上一次写博还是1年前的事了，懒惰让我停止了更新。
-随着接触的技术的增多，发现前端水真是很深，代码的世界是如此美妙。我得加快步伐，追赶他们了，这个博客，也是我的每一步的见证。希望通过写文章的形式，反思、咀嚼、吸收的知识，传播技术。
-这也算是一种重生吧。">
+<meta name="twitter:title" content="Leetcode #198 House Robber">
+<meta name="twitter:description" content="Problem Description
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -62,7 +59,7 @@
   };
 </script>
 
-    <title> Reborn // Yizhao He's Notes </title>
+    <title> Leetcode #198 House Robber // Yizhao He's Notes </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -183,7 +180,7 @@
           
           
             
-              Reborn
+              Leetcode #198 House Robber
             
           
         </h1>
@@ -192,8 +189,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2014-06-14T21:20:00-07:00" content="2014-06-14">
-            2014-06-14
+          <time itemprop="dateCreated" datetime="2015-10-17T17:37:28-07:00" content="2015-10-17">
+            2015-10-17
           </time>
         </span>
 
@@ -201,7 +198,7 @@
           <span class="post-category" >
             &nbsp; | &nbsp; 分类于
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/Leetcode-in-JS/" itemprop="url" rel="index"><span itemprop="name">Leetcode in JS</span></a></span>
 
               
               
@@ -214,8 +211,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2014/reborn/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2014/reborn/" itemprop="commentsCount"></span>
+              <a href="/2015/leetcode-198-house-robber/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/leetcode-198-house-robber/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -229,9 +226,25 @@
       
 
       
-        <span itemprop="articleBody"><p>上一次写博还是1年前的事了，懒惰让我停止了更新。</p>
-<p>随着接触的技术的增多，发现前端水真是很深，代码的世界是如此美妙。我得加快步伐，追赶他们了，这个博客，也是我的每一步的见证。希望通过写文章的形式，反思、咀嚼、吸收的知识，传播技术。</p>
-<p>这也算是一种重生吧。</p>
+        <span itemprop="articleBody"><h1 id="Problem_Description">Problem Description</h1><blockquote>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight <strong>without alerting the police</strong>.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Analysis">Analysis</h1><p>动态规划问题。</p>
+<p>设对于 n 个房子，能抢到的最大金钱数为 OPT(n)，每栋房子 i 的价值为 Vi。</p>
+<h2 id="递归公式">递归公式</h2><p>对于一栋房子来说，只有两个选择，抢或者不抢。</p>
+<ol>
+<li>抢： OPT(n) = Vn + OPT(n - 2)</li>
+<li>不抢： OPT(n) = OPT(n - 1)</li>
+</ol>
+<p>也就是，如果抢了 n, 那么最多只能抢 n 前面的第二家；如果没抢 n，那么可以抢 n 前面的那一家。</p>
+<h2 id="初始化">初始化</h2><ol>
+<li>n = 0，钱数为 0</li>
+<li>n = 1，钱数为第一家的钱数</li>
+<li>n = 2，钱数为第一家和第二家中钱数最大者</li>
+</ol>
+<h1 id="Solution">Solution</h1><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * <span class="constant">@param</span> &#123;<span class="built_in">number</span>[]&#125; nums</span><br><span class="line"> * <span class="constant">@return</span> &#123;<span class="built_in">number</span>&#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">function rob(nums) &#123;</span><br><span class="line">	var length = nums.length<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> nums[<span class="number">0</span>]<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	var <span class="built_in">opt</span> = []<span class="comment">;</span></span><br><span class="line">	<span class="built_in">opt</span>[<span class="number">0</span>] = nums[<span class="number">0</span>],</span><br><span class="line">	<span class="built_in">opt</span>[<span class="number">1</span>] = Math.<span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (var i = <span class="number">2</span><span class="comment">; i &lt; length; i++) &#123;</span></span><br><span class="line">		<span class="built_in">opt</span>[i] = Math.<span class="built_in">max</span>(nums[i] + <span class="built_in">opt</span>[i - <span class="number">2</span>], <span class="built_in">opt</span>[i - <span class="number">1</span>])<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">opt</span>[length - <span class="number">1</span>]<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -240,7 +253,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag">#随笔</a>
+            <a href="/tags/Algorithm/" rel="tag">#Algorithm</a>
+          
+            <a href="/tags/Dynamic-Programming/" rel="tag">#Dynamic Programming</a>
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/Leetcode/" rel="tag">#Leetcode</a>
           
         </div>
       
@@ -249,11 +268,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/ali-summer-intern-day1/" rel="prev">2014 Alibaba Summer Intern Day 1</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/leetcode-70-climb-stairs/" rel="next">Leetcode #70 Climb Stairs</a>
             
           </div>
         </div>
@@ -279,8 +298,8 @@
             
               <div class="comments" id="comments">
                 
-                  <div class="ds-thread" data-thread-key="2014/reborn/"
-                       data-title="Reborn" data-url="http://1mhz.me/2014/reborn/">
+                  <div class="ds-thread" data-thread-key="2015/leetcode-198-house-robber/"
+                       data-title="Leetcode #198 House Robber" data-url="http://1mhz.me/2015/leetcode-198-house-robber/">
                   </div>
                 
               </div>
@@ -379,7 +398,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem_Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Analysis"><span class="nav-number">2.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归公式"><span class="nav-number">2.1.</span> <span class="nav-text">递归公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.2.</span> <span class="nav-text">初始化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
