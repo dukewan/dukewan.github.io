@@ -350,6 +350,23 @@
   </entry>
   
   <entry>
+    <title><![CDATA[test]]></title>
+    <link href="http://1mhz.me/2014/test/"/>
+    <id>http://1mhz.me/2014/test/</id>
+    <published>2014-07-01T06:00:00.000Z</published>
+    <updated>2015-10-18T01:41:08.000Z</updated>
+    <content type="html"><![CDATA[<p>今天入职，耶！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>今天入职，耶！</p>
+]]>
+    </summary>
+    
+      <category term="Hackerrank In JS" scheme="http://1mhz.me/categories/Hackerrank-In-JS/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[2014 Alibaba Summer Intern Day 1]]></title>
     <link href="http://1mhz.me/2014/ali-summer-intern-day1/"/>
     <id>http://1mhz.me/2014/ali-summer-intern-day1/</id>
