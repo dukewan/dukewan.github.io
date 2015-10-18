@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://1mhz.me/"/>
-  <updated>2015-10-18T00:59:30.000Z</updated>
+  <updated>2015-10-18T01:17:49.000Z</updated>
   <id>http://1mhz.me/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://1mhz.me/2015/leetcode-198-house-robber/"/>
     <id>http://1mhz.me/2015/leetcode-198-house-robber/</id>
     <published>2015-10-18T00:37:28.000Z</published>
-    <updated>2015-10-18T00:59:30.000Z</updated>
+    <updated>2015-10-18T01:17:49.000Z</updated>
     <content type="html"><![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
 <p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
 <p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight <strong>without alerting the police</strong>.</p>
@@ -56,7 +56,7 @@
     
       <category term="Leetcode" scheme="http://1mhz.me/tags/Leetcode/"/>
     
-      <category term="Leetcode in JS" scheme="http://1mhz.me/categories/Leetcode-in-JS/"/>
+      <category term="Leetcode In JS" scheme="http://1mhz.me/categories/Leetcode-In-JS/"/>
     
   </entry>
   
@@ -65,7 +65,7 @@
     <link href="http://1mhz.me/2015/leetcode-70-climb-stairs/"/>
     <id>http://1mhz.me/2015/leetcode-70-climb-stairs/</id>
     <published>2015-10-17T22:38:29.000Z</published>
-    <updated>2015-10-18T00:56:30.000Z</updated>
+    <updated>2015-10-18T01:17:45.000Z</updated>
     <content type="html"><![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
 <p>You are climbing a stair case. It takes n steps to reach to the top.</p>
 <p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
@@ -96,7 +96,7 @@
     
       <category term="Leetcode" scheme="http://1mhz.me/tags/Leetcode/"/>
     
-      <category term="Leetcode in JS" scheme="http://1mhz.me/categories/Leetcode-in-JS/"/>
+      <category term="Leetcode In JS" scheme="http://1mhz.me/categories/Leetcode-In-JS/"/>
     
   </entry>
   
@@ -105,7 +105,7 @@
     <link href="http://1mhz.me/2015/hackerrank-funky-rolodex/"/>
     <id>http://1mhz.me/2015/hackerrank-funky-rolodex/</id>
     <published>2015-10-14T17:02:48.000Z</published>
-    <updated>2015-10-15T18:30:12.000Z</updated>
+    <updated>2015-10-18T01:17:57.000Z</updated>
     <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>上周参加了学校的 Career Fair，想锻炼下面试技巧和口语能力，为下学期找暑期实习做点准备。那天整条路都是熙熙攘攘的面试官和学生，Facebook、Amazon、Microsoft、eBay 这些大公司尤其火爆，有的人排了几个小时才面试上。</p>
 <p>因为我刚来 USC 两个月，实力不够，而且大公司又有冷冻期（一次没有录上半年内不再面试），所以我也没敢投大公司，挑了几个看起来不错的小公司试试水。一共投了五个，拿到 Percolate 和 Paypal 两家的 Coding Challenge，还有一家 Demand Media 说是非常喜欢我，之后会打电话让我去 onsite interview（为啥现在还没打电话！）。</p>
 <p>这道题是 Percolate 的题，名字叫 Funky Rolodex(复杂的关系网) 并没有考算法，而是非常贴近实际需求，处理文本文件，筛选出正确的数据解析并输出成JSON格式。虽然并不难，但是需要注意的小细节不少，譬如输出结果要按照相应地缩进，要对数据按照 Lastname 和 Firstname 排序。我之前没有注意到排序这一点，导致后来重构了一些代码，而且对我来说，排序这里是最难的（后面会解释）。</p>
@@ -151,7 +151,7 @@
     
       <category term="Regular Expression" scheme="http://1mhz.me/tags/Regular-Expression/"/>
     
-      <category term="Hackerrank in JS" scheme="http://1mhz.me/categories/Hackerrank-in-JS/"/>
+      <category term="Hackerrank In JS" scheme="http://1mhz.me/categories/Hackerrank-In-JS/"/>
     
   </entry>
   
@@ -160,7 +160,7 @@
     <link href="http://1mhz.me/2015/leetcode-258-add-digits/"/>
     <id>http://1mhz.me/2015/leetcode-258-add-digits/</id>
     <published>2015-09-28T23:00:00.000Z</published>
-    <updated>2015-10-14T20:08:07.000Z</updated>
+    <updated>2015-10-18T01:17:53.000Z</updated>
     <content type="html"><![CDATA[<h2 id="Problem_Description">Problem Description</h2><blockquote>
 <p>Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.</p>
 <p>For example:</p>
@@ -184,7 +184,7 @@
     
       <category term="Leetcode" scheme="http://1mhz.me/tags/Leetcode/"/>
     
-      <category term="Leetcode in JS" scheme="http://1mhz.me/categories/Leetcode-in-JS/"/>
+      <category term="Leetcode In JS" scheme="http://1mhz.me/categories/Leetcode-In-JS/"/>
     
   </entry>
   
