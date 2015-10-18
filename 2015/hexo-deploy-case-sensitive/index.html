@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="Node.js," />
+  <meta name="keywords" content="Git,Hexo," />
 
 
 
@@ -37,22 +37,23 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="前言今天早上因为罪恶感奋发图强，早早起来开始背单词。背之前想先听一下WordList 3的单词音频，所以用手机对着红宝书WordList上的二维码扫了一下，进入网页听录音（新东方真是与时俱进呀！都用上二维码了！！）。
-听了一会，突发奇想，何不把所有WordList的音频都下下来装在手机里呢，这样随时都可以听！于是开始笨拙的把微信里的网页链接分享到电脑上，然后用浏览器一个一个的下载，下了几个感觉不对">
+<meta name="description" content="问题使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。
+譬如 Hexo 生成了一个 Hackerrank in JS Category文件夹，但是我后来把它改成了  Hackerrank in JS，即 in 的首字母大写了。Hexo会生成正确，但部署到 Github 上却老是不正确。
+原因git 默认忽略文件名大小写，所以即使文件夹大小写变更，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 nodejs 批量下载红宝书音频">
-<meta property="og:url" content="http://1mhz.me/2014/get-gre-word-list-tapes/index.html">
+<meta property="og:title" content="Hexo 部署到 Github Pages 文件夹大小写问题">
+<meta property="og:url" content="http://1mhz.me/2015/hexo-deploy-case-sensitive/index.html">
 <meta property="og:site_name" content="Yizhao He's Notes">
-<meta property="og:description" content="前言今天早上因为罪恶感奋发图强，早早起来开始背单词。背之前想先听一下WordList 3的单词音频，所以用手机对着红宝书WordList上的二维码扫了一下，进入网页听录音（新东方真是与时俱进呀！都用上二维码了！！）。
-听了一会，突发奇想，何不把所有WordList的音频都下下来装在手机里呢，这样随时都可以听！于是开始笨拙的把微信里的网页链接分享到电脑上，然后用浏览器一个一个的下载，下了几个感觉不对">
-<meta property="og:image" content="http://1mhz.me/images/2014/get-gre-word-list-tapes-flow.png">
-<meta property="og:image" content="http://1mhz.me/images/2014/download.png">
-<meta property="og:image" content="http://1mhz.me/images/2014/itunes.png">
-<meta property="og:updated_time" content="2015-10-08T18:04:31.000Z">
+<meta property="og:description" content="问题使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。
+譬如 Hexo 生成了一个 Hackerrank in JS Category文件夹，但是我后来把它改成了  Hackerrank in JS，即 in 的首字母大写了。Hexo会生成正确，但部署到 Github 上却老是不正确。
+原因git 默认忽略文件名大小写，所以即使文件夹大小写变更，">
+<meta property="og:image" content="http://7xnlp7.com1.z0.glb.clouddn.com/hexo-deploy.png-small">
+<meta property="og:updated_time" content="2015-10-18T02:11:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 nodejs 批量下载红宝书音频">
-<meta name="twitter:description" content="前言今天早上因为罪恶感奋发图强，早早起来开始背单词。背之前想先听一下WordList 3的单词音频，所以用手机对着红宝书WordList上的二维码扫了一下，进入网页听录音（新东方真是与时俱进呀！都用上二维码了！！）。
-听了一会，突发奇想，何不把所有WordList的音频都下下来装在手机里呢，这样随时都可以听！于是开始笨拙的把微信里的网页链接分享到电脑上，然后用浏览器一个一个的下载，下了几个感觉不对">
+<meta name="twitter:title" content="Hexo 部署到 Github Pages 文件夹大小写问题">
+<meta name="twitter:description" content="问题使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。
+譬如 Hexo 生成了一个 Hackerrank in JS Category文件夹，但是我后来把它改成了  Hackerrank in JS，即 in 的首字母大写了。Hexo会生成正确，但部署到 Github 上却老是不正确。
+原因git 默认忽略文件名大小写，所以即使文件夹大小写变更，">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -62,7 +63,7 @@
   };
 </script>
 
-    <title> 使用 nodejs 批量下载红宝书音频 // Yizhao He's Notes </title>
+    <title> Hexo 部署到 Github Pages 文件夹大小写问题 // Yizhao He's Notes </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -183,7 +184,7 @@
           
           
             
-              使用 nodejs 批量下载红宝书音频
+              Hexo 部署到 Github Pages 文件夹大小写问题
             
           
         </h1>
@@ -192,8 +193,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2014-07-27T19:05:00-07:00" content="2014-07-27">
-            2014-07-27
+          <time itemprop="dateCreated" datetime="2015-10-17T18:54:09-07:00" content="2015-10-17">
+            2015-10-17
           </time>
         </span>
 
@@ -201,7 +202,7 @@
           <span class="post-category" >
             &nbsp; | &nbsp; 分类于
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
 
               
               
@@ -214,8 +215,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2014/get-gre-word-list-tapes/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2014/get-gre-word-list-tapes/" itemprop="commentsCount"></span>
+              <a href="/2015/hexo-deploy-case-sensitive/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/hexo-deploy-case-sensitive/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -229,30 +230,22 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="前言">前言</h1><p>今天早上因为<del>罪恶感</del>奋发图强，早早起来开始背单词。背之前想先听一下WordList 3的单词音频，所以用手机对着红宝书WordList上的二维码扫了一下，进入网页听录音（新东方真是与时俱进呀！都用上二维码了！！）。</p>
-<p>听了一会，突发奇想，何不把所有WordList的音频都下下来装在手机里呢，这样随时都可以听！于是开始笨拙的把微信里的网页链接分享到电脑上，然后用浏览器一个一个的下载，下了几个感觉不对劲。。。太麻烦了，这种重复性的工作干嘛要自己做！！交给计算机就好了嘛！</p>
-<p>so，我写了个<code>nodejs</code>程序批量的下载，不到1分钟，42个list的录音就都进入了我的硬盘。 ; ）</p>
-<p>首先是github <a href="https://github.com/dukewan/getGreWordListTapes" target="_blank" rel="external">项目地址</a>，取名为 <code>getGreWordListTapes</code> ~</p>
-<p>下面我说说制作过程<br><a id="more"></a></p>
-<h1 id="找规律">找规律</h1><p>红宝书里的二维码所包含的信息就是音频的链接，链接的形式如下：</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span>/<span class="regexp">/download.dogwood.com.cn/online</span><span class="regexp">/grechjx/</span><span class="constant">WordList01</span>.mp3</span><br></pre></td></tr></table></figure>
-<p>很容易看出，末尾就是WordList01.mp3，代表第1个单词表的音频，随便改了下那个数字，改成02，03，..，42等，都能访问对应的单词表的音频。</p>
-<p>所以批量下载就是从01循环到42，就能下载所有的单词表的音频啦。</p>
-<h1 id="处理流程">处理流程</h1><p><img src="/images/2014/get-gre-word-list-tapes-flow.png" alt="处理流程图"></p>
-<h1 id="几点注意">几点注意</h1><p>其实本身也很简单，按照流程图很快就能做出来，但是有一些需要注意的地方。譬如：</p>
-<ol>
-<li><p>nodejs 的  <code>http</code>  模块的 <code>get</code> 方法可以帮助我们请求目标url，并获取返回的数据，但是数据不是一次性返回的，而是一段( <code>chunk</code>）一段的来的，因此我们需要在 <code>get</code> 方法的回调函数里对 http response的 <code>data</code> 事件进行监听，并对获取到的数据段进行文件的 append 操作。</p>
-</li>
-<li><p>nodejs 可以并发的下载，而且各个文件的下载并不是按顺序来的。但是文件的写入是按顺序并且是同步的写入的，不然就会出现文件错乱。因此我采用了 <code>fs</code> 模块的 <code>appendFileSync</code> 方法。</p>
-</li>
-<li><p>需要对音频文件是否存在进行判断，不然就会出现第二次运行下载程序的时候，会在之前下载过的文件后继续append。 这是个逻辑问题，哈~</p>
-</li>
-</ol>
-<h1 id="处理代码">处理代码</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>),</span><br><span class="line">    util = <span class="built_in">require</span>(<span class="string">'util'</span>),</span><br><span class="line">    fs = <span class="built_in">require</span>(<span class="string">'fs'</span>),</span><br><span class="line">    path = <span class="built_in">require</span>(<span class="string">'path'</span>),</span><br><span class="line">    chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> urlTemplate = <span class="string">'http://download.dogwood.com.cn/online/grechjx/WordList%s.mp3'</span>,</span><br><span class="line">    start = <span class="number">1</span>,</span><br><span class="line">    end = <span class="number">42</span>,</span><br><span class="line">    fileBasePath = <span class="string">'./download/'</span>,</span><br><span class="line">    fileTemplate = <span class="string">'WordList%s.mp3'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(chalk.red(<span class="string">'G'</span>) + chalk.green(<span class="string">'R'</span>) + chalk.yellow(<span class="string">'E'</span>)</span><br><span class="line">            + chalk.blue(<span class="string">' 词汇精选音频'</span>)</span><br><span class="line">            + chalk.cyan(<span class="string">'  开始下载！！！'</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(chalk.green(<span class="string">'Tips: 每个list的音频大概是13M，所以下载速度会因网速而异，'</span></span><br><span class="line">            + <span class="string">'请耐心等待哦~ 下载完成的list都在download文件夹中。'</span>) )</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">    download(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> str = (i &lt; <span class="number">10</span> ? <span class="string">'0'</span> : <span class="string">''</span>) + i,</span><br><span class="line">    url = util.format(urlTemplate, str),</span><br><span class="line">    filename = util.format(fileTemplate, str),</span><br><span class="line">    filePath = path.normalize(fileBasePath + filename);</span><br><span class="line"></span><br><span class="line">    fs.exists(filePath, <span class="function"><span class="keyword">function</span> (<span class="params">exists</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(exists) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(chalk.yellow(<span class="string">'% '</span>) + chalk.white(filename) + chalk.yellow(<span class="string">' 已存在，不再下载'</span>));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            http.get(url, <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                <span class="comment">// console.log(chalk.magenta('$ ') + chalk.white('开始下载 ') + chalk.white(filename));</span></span><br><span class="line">                res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">                    fs.appendFileSync(filePath, chunk);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">                res.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(chalk.green(<span class="string">'✓ '</span>) + chalk.yellow(<span class="string">'下载 '</span>) + chalk.blue(filename) + chalk.green(<span class="string">' 成功!'</span>));</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;)</span><br><span class="line">            .on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(chalk.red(<span class="string">'X '</span>) + chalk.yellow(<span class="string">'下载 '</span>) + chalk.blue(filename) + chalk.red(<span class="string">' 失败!'</span>));</span><br><span class="line">                <span class="built_in">console</span>.log(err);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="运行效果">运行效果</h1><p>使用 <a href="https://www.npmjs.org/package/chalk" target="_blank" rel="external">chalk</a> 模块添加了下图中的终端高亮效果，嘿嘿~</p>
-<p><img src="/images/2014/download.png" alt="下载效果"></p>
-<p>最后，把所有的音频添加到itunes中做成专辑，加上封面~</p>
-<p><img src="/images/2014/itunes.png" alt="itunes"></p>
+        <span itemprop="articleBody"><h1 id="问题">问题</h1><p>使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。</p>
+<p>譬如 Hexo 生成了一个 <code>Hackerrank in JS</code> Category文件夹，但是我后来把它改成了  <code>Hackerrank in JS</code>，即 in 的首字母大写了。Hexo会生成正确，但部署到 Github 上却老是不正确。</p>
+<h1 id="原因">原因</h1><p>git 默认忽略文件名大小写，所以即使文件夹大小写变更，git 也检测不到。</p>
+<h1 id="解决办法">解决办法</h1><ul>
+<li>进入到博客项目中 <code>.deploy_git</code>文件夹，修改 <code>.git</code> 下的 <code>config</code> 文件，将 <code>ignorecase=true</code> 改为 <code>ignorecase=false</code> </li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="class">.deploy_git</span></span><br><span class="line">vim .git/config</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/hexo-deploy.png-small" alt="config"></p>
+<ul>
+<li>删除博客项目中 <code>.deploy_git</code> 文件夹下的所有文件，并 push 到 Github 上, 这一步是清空你的 github.io 项目中所有文件。</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">rm</span> -rf *</span><br><span class="line">git commit -<span class="keyword">m</span> 'clean all <span class="keyword">file</span>'</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 Hexo 再次生成及部署</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ..</span><br><span class="line">hexo clean</span><br><span class="line">hexo deploy -<span class="keyword">generate</span></span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -261,7 +254,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
           
         </div>
       
@@ -270,13 +265,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/leetcode-258-add-digits/" rel="prev">Leetcode #258 Add Digits</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/how-to-code-a-connect-middle-ware/" rel="next">如何编写一个connect中间件</a>
+              <a href="/2015/leetcode-198-house-robber/" rel="next">Leetcode #198 House Robber</a>
             
           </div>
         </div>
@@ -302,8 +295,8 @@
             
               <div class="comments" id="comments">
                 
-                  <div class="ds-thread" data-thread-key="2014/get-gre-word-list-tapes/"
-                       data-title="使用 nodejs 批量下载红宝书音频" data-url="http://1mhz.me/2014/get-gre-word-list-tapes/">
+                  <div class="ds-thread" data-thread-key="2015/hexo-deploy-case-sensitive/"
+                       data-title="Hexo 部署到 Github Pages 文件夹大小写问题" data-url="http://1mhz.me/2015/hexo-deploy-case-sensitive/">
                   </div>
                 
               </div>
@@ -402,7 +395,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#找规律"><span class="nav-number">2.</span> <span class="nav-text">找规律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理流程"><span class="nav-number">3.</span> <span class="nav-text">处理流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几点注意"><span class="nav-number">4.</span> <span class="nav-text">几点注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理代码"><span class="nav-number">5.</span> <span class="nav-text">处理代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行效果"><span class="nav-number">6.</span> <span class="nav-text">运行效果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
