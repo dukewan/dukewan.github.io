@@ -48,7 +48,7 @@
 譬如 Hexo 生成了一个 Hackerrank in JS Category文件夹，但是我后来把它改成了  Hackerrank in JS，即 in 的首字母大写了。Hexo会生成正确，但部署到 Github 上却老是不正确。
 原因git 默认忽略文件名大小写，所以即使文件夹大小写变更，">
 <meta property="og:image" content="http://7xnlp7.com1.z0.glb.clouddn.com/hexo-deploy.png-small">
-<meta property="og:updated_time" content="2015-10-18T02:11:51.000Z">
+<meta property="og:updated_time" content="2015-10-18T02:15:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 部署到 Github Pages 文件夹大小写问题">
 <meta name="twitter:description" content="问题使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。
@@ -233,6 +233,7 @@
         <span itemprop="articleBody"><h1 id="问题">问题</h1><p>使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。</p>
 <p>譬如 Hexo 生成了一个 <code>Hackerrank in JS</code> Category文件夹，但是我后来把它改成了  <code>Hackerrank in JS</code>，即 in 的首字母大写了。Hexo会生成正确，但部署到 Github 上却老是不正确。</p>
 <h1 id="原因">原因</h1><p>git 默认忽略文件名大小写，所以即使文件夹大小写变更，git 也检测不到。</p>
+<a id="more"></a>
 <h1 id="解决办法">解决办法</h1><ul>
 <li>进入到博客项目中 <code>.deploy_git</code>文件夹，修改 <code>.git</code> 下的 <code>config</code> 文件，将 <code>ignorecase=true</code> 改为 <code>ignorecase=false</code> </li>
 </ul>

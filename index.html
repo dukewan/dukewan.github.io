@@ -227,23 +227,14 @@
 
       
         
-          <span itemprop="articleBody"><h1 id="问题">问题</h1><p>使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。</p>
+          <h1 id="问题">问题</h1><p>使用 Hexo 部署博客到 Github Pages 时经常会遇到文件夹大小写问题导致的 404问题。</p>
 <p>譬如 Hexo 生成了一个 <code>Hackerrank in JS</code> Category文件夹，但是我后来把它改成了  <code>Hackerrank in JS</code>，即 in 的首字母大写了。Hexo会生成正确，但部署到 Github 上却老是不正确。</p>
 <h1 id="原因">原因</h1><p>git 默认忽略文件名大小写，所以即使文件夹大小写变更，git 也检测不到。</p>
-<h1 id="解决办法">解决办法</h1><ul>
-<li>进入到博客项目中 <code>.deploy_git</code>文件夹，修改 <code>.git</code> 下的 <code>config</code> 文件，将 <code>ignorecase=true</code> 改为 <code>ignorecase=false</code> </li>
-</ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="class">.deploy_git</span></span><br><span class="line">vim .git/config</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/hexo-deploy.png-small" alt="config"></p>
-<ul>
-<li>删除博客项目中 <code>.deploy_git</code> 文件夹下的所有文件，并 push 到 Github 上, 这一步是清空你的 github.io 项目中所有文件。</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">rm</span> -rf *</span><br><span class="line">git commit -<span class="keyword">m</span> 'clean all <span class="keyword">file</span>'</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用 Hexo 再次生成及部署</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ..</span><br><span class="line">hexo clean</span><br><span class="line">hexo deploy -<span class="keyword">generate</span></span><br></pre></td></tr></table></figure>
-</span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/hexo-deploy-case-sensitive/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
