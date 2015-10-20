@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://1mhz.me/"/>
-  <updated>2015-10-18T02:16:27.000Z</updated>
+  <updated>2015-10-20T18:02:06.000Z</updated>
   <id>http://1mhz.me/</id>
   
   <author>
@@ -13,6 +13,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Leetcode #213 House Robber II]]></title>
+    <link href="http://1mhz.me/2015/leetcode-213-house-robber-II/"/>
+    <id>http://1mhz.me/2015/leetcode-213-house-robber-II/</id>
+    <published>2015-10-20T17:32:12.000Z</published>
+    <updated>2015-10-20T18:02:06.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
+<p>After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Analysis">Analysis</h1><p>Dynamic Programming problem.</p>
+<p>Since the houses are arranged in circle, we should take the first house and the last house specially. Because if we rob the first one, we can’t rob the last one since it’s the neighbor of the first one.</p>
+<p>So there are only two special cases:</p>
+<ol>
+<li>rob the first one, don’t rob the last one</li>
+<li>rob the last one, don’t rob the first one</li>
+</ol>
+<p>For case 1, the problem turns into a #198 House Robber problem of 1 … n-1 houses.</p>
+<p>For case 2, the problem turns into a #198 House Robber problem of 2 … n houses.</p>
+<p>Compute the maximum amount of both cases and return the larger one.</p>
+<h2 id="Recursive_Formula">Recursive Formula</h2><p>For n houses, let OPT(n) denotes the maximum amount we can rob, let Vi denotes the money that the ith house holds. </p>
+<p>For the nth house, we have two cases, rob or not rob.</p>
+<ol>
+<li>rob： OPT(n) = Vn + OPT(n - 2)</li>
+<li>not rob： OPT(n) = OPT(n - 1)</li>
+</ol>
+<p>It means that if we rob the nth house, we can only rob the (n-2)th house next, if we don’t rob the nth house, then we can rob the (n-1)th house next. </p>
+<h2 id="Initialization">Initialization</h2><p>n means the total number of houses.</p>
+<ol>
+<li>n = 0，total amount we can rob is 0</li>
+<li>n = 1，total amount equals to the money the first house holds</li>
+<li>n = 2，total amount equals to the larger amount of the first and the second house holds</li>
+</ol>
+<h1 id="Solution">Solution</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line">var rob = function(nums) &#123;</span><br><span class="line">	var length = nums.length;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length == <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	var opt1 = [],</span><br><span class="line">		opt2 = [];</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1 to n-1</span></span><br><span class="line">	opt1[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">	opt1[<span class="number">1</span>] = Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">for</span> (var i = <span class="number">2</span>; i &lt;= length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">		opt1[i] = Math.max(nums[i] + opt1[i - <span class="number">2</span>], opt1[i - <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2 to n</span></span><br><span class="line">	opt2[<span class="number">1</span>] = nums[<span class="number">1</span>];</span><br><span class="line">	opt2[<span class="number">2</span>] = Math.max(nums[<span class="number">1</span>], nums[<span class="number">2</span>]);</span><br><span class="line">	<span class="keyword">for</span> (var j = <span class="number">3</span>; j &lt;= length - <span class="number">1</span>; j++) &#123;</span><br><span class="line">		opt2[j] = Math.max(nums[j] + opt2[j - <span class="number">2</span>], opt2[j - <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> Math.max(opt1[length - <span class="number">2</span>], opt2[length - <span class="number">1</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
+<p>After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
+</blockquote>]]>
+    
+    </summary>
+    
+      <category term="Algorithm" scheme="http://1mhz.me/tags/Algorithm/"/>
+    
+      <category term="Dynamic Programming" scheme="http://1mhz.me/tags/Dynamic-Programming/"/>
+    
+      <category term="JavaScript" scheme="http://1mhz.me/tags/JavaScript/"/>
+    
+      <category term="Leetcode" scheme="http://1mhz.me/tags/Leetcode/"/>
+    
+      <category term="Leetcode In JS" scheme="http://1mhz.me/categories/Leetcode-In-JS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hexo 部署到 Github Pages 文件夹大小写问题]]></title>
@@ -58,24 +114,25 @@
     <link href="http://1mhz.me/2015/leetcode-198-house-robber/"/>
     <id>http://1mhz.me/2015/leetcode-198-house-robber/</id>
     <published>2015-10-18T00:37:28.000Z</published>
-    <updated>2015-10-18T01:17:49.000Z</updated>
+    <updated>2015-10-20T17:59:20.000Z</updated>
     <content type="html"><![CDATA[<h1 id="Problem_Description">Problem Description</h1><blockquote>
 <p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
 <p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight <strong>without alerting the police</strong>.</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="Analysis">Analysis</h1><p>动态规划问题。</p>
-<p>设对于 n 个房子，能抢到的最大金钱数为 OPT(n)，每栋房子 i 的价值为 Vi。</p>
-<h2 id="递归公式">递归公式</h2><p>对于一栋房子来说，只有两个选择，抢或者不抢。</p>
+<h1 id="Analysis">Analysis</h1><p>Dynamic Programming problem.</p>
+<h2 id="Recursive_Formula">Recursive Formula</h2><p>For n houses, let OPT(n) denotes the maximum amount we can rob, let Vi denotes the money that the ith house holds. </p>
+<p>For the nth house, we have two cases, rob or not rob.</p>
 <ol>
-<li>抢： OPT(n) = Vn + OPT(n - 2)</li>
-<li>不抢： OPT(n) = OPT(n - 1)</li>
+<li>rob： OPT(n) = Vn + OPT(n - 2)</li>
+<li>not rob： OPT(n) = OPT(n - 1)</li>
 </ol>
-<p>也就是，如果抢了 n, 那么最多只能抢 n 前面的第二家；如果没抢 n，那么可以抢 n 前面的那一家。</p>
-<h2 id="初始化">初始化</h2><ol>
-<li>n = 0，钱数为 0</li>
-<li>n = 1，钱数为第一家的钱数</li>
-<li>n = 2，钱数为第一家和第二家中钱数最大者</li>
+<p>It means that if we rob the nth house, we can only rob the (n-2)th house next, if we don’t rob the nth house, then we can rob the (n-1)th house next. </p>
+<h2 id="Initialization">Initialization</h2><p>n means the total number of houses.</p>
+<ol>
+<li>n = 0，total amount we can rob is 0</li>
+<li>n = 1，total amount equals to the money the first house holds</li>
+<li>n = 2，total amount equals to the larger amount of the first and the second house holds</li>
 </ol>
 <h1 id="Solution">Solution</h1><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * <span class="constant">@param</span> &#123;<span class="built_in">number</span>[]&#125; nums</span><br><span class="line"> * <span class="constant">@return</span> &#123;<span class="built_in">number</span>&#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">function rob(nums) &#123;</span><br><span class="line">	var length = nums.length<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> nums[<span class="number">0</span>]<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	var <span class="built_in">opt</span> = []<span class="comment">;</span></span><br><span class="line">	<span class="built_in">opt</span>[<span class="number">0</span>] = nums[<span class="number">0</span>],</span><br><span class="line">	<span class="built_in">opt</span>[<span class="number">1</span>] = Math.<span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (var i = <span class="number">2</span><span class="comment">; i &lt; length; i++) &#123;</span></span><br><span class="line">		<span class="built_in">opt</span>[i] = Math.<span class="built_in">max</span>(nums[i] + <span class="built_in">opt</span>[i - <span class="number">2</span>], <span class="built_in">opt</span>[i - <span class="number">1</span>])<span class="comment">;</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">opt</span>[length - <span class="number">1</span>]<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
