@@ -38,24 +38,22 @@
 
 
 <meta name="description" content="Problem Description
-You are climbing a stair case. It takes n steps to reach to the top.
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?">
+Say you have an array for which the ith element is the price of a given stock on day i.
+If you were only permitted to complete at most one transaction (ie, buy one and sell one sha">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode #70 Climb Stairs">
-<meta property="og:url" content="http://1mhz.me/2015/leetcode-70-climb-stairs/index.html">
+<meta property="og:title" content="Leetcode In JS #121 Best Time To Buy And Sell Stock">
+<meta property="og:url" content="http://1mhz.me/2015/leetcode-in-js-121-best-time-to-buy-and-sell-stock/index.html">
 <meta property="og:site_name" content="Yizhao He's Notes">
 <meta property="og:description" content="Problem Description
-You are climbing a stair case. It takes n steps to reach to the top.
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?">
-<meta property="og:image" content="http://7xnlp7.com1.z0.glb.clouddn.com/70-notes.png-small">
-<meta property="og:image" content="http://7xnlp7.com1.z0.glb.clouddn.com/70-runtime1.png-small">
-<meta property="og:image" content="http://7xnlp7.com1.z0.glb.clouddn.com/70-runtime2.png-small">
-<meta property="og:updated_time" content="2015-10-18T01:17:45.000Z">
+Say you have an array for which the ith element is the price of a given stock on day i.
+If you were only permitted to complete at most one transaction (ie, buy one and sell one sha">
+<meta property="og:image" content="http://7xnlp7.com1.z0.glb.clouddn.com/121-stock%20prices.png-small">
+<meta property="og:updated_time" content="2015-10-21T22:56:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode #70 Climb Stairs">
+<meta name="twitter:title" content="Leetcode In JS #121 Best Time To Buy And Sell Stock">
 <meta name="twitter:description" content="Problem Description
-You are climbing a stair case. It takes n steps to reach to the top.
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?">
+Say you have an array for which the ith element is the price of a given stock on day i.
+If you were only permitted to complete at most one transaction (ie, buy one and sell one sha">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -65,7 +63,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
   };
 </script>
 
-    <title> Leetcode #70 Climb Stairs // Yizhao He's Notes </title>
+    <title> Leetcode In JS #121 Best Time To Buy And Sell Stock // Yizhao He's Notes </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -186,7 +184,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
           
           
             
-              Leetcode #70 Climb Stairs
+              Leetcode In JS #121 Best Time To Buy And Sell Stock
             
           
         </h1>
@@ -195,8 +193,8 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-10-17T15:38:29-07:00" content="2015-10-17">
-            2015-10-17
+          <time itemprop="dateCreated" datetime="2015-10-21T10:30:33-07:00" content="2015-10-21">
+            2015-10-21
           </time>
         </span>
 
@@ -217,8 +215,8 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/leetcode-70-climb-stairs/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/leetcode-70-climb-stairs/" itemprop="commentsCount"></span>
+              <a href="/2015/leetcode-in-js-121-best-time-to-buy-and-sell-stock/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/leetcode-in-js-121-best-time-to-buy-and-sell-stock/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -233,18 +231,45 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 
       
         <span itemprop="articleBody"><h1 id="Problem_Description">Problem Description</h1><blockquote>
-<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
-<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<p>Say you have an array for which the ith element is the price of a given stock on day i.</p>
+<p>If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="Analysis">Analysis</h1><p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/70-notes.png-small" alt="分析"></p>
-<h1 id="Solution">Solution</h1><h2 id="Solution_1_Recusive_Version">Solution 1 Recusive Version</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number&#125; n</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Dynamic Programming - Memorized Recursive Version</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> W = [0, 1, 2];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> climbStairs = function(<span class="keyword">n</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (W[<span class="keyword">n</span>] === undefined)&#123;</span><br><span class="line">		W[<span class="keyword">n</span>] = climbStairs(<span class="keyword">n</span> - 2) + climbStairs(<span class="keyword">n</span> - 1);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> W[<span class="keyword">n</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>递归方式运行时间:</p>
-<p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/70-runtime1.png-small" alt="递归方式运行时间"></p>
-<h2 id="Solution_2_Loop_Version">Solution 2 Loop Version</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@param</span> &#123;number&#125; n</span><br><span class="line"> * <span class="doctag">@return</span> &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Dynamic Programming - Loop Version</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> climbStairs = <span class="function"><span class="keyword">function</span><span class="params">(n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> W = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		W[i] = W[i - <span class="number">2</span>] + W[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> W[n];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>循环方式运行时间:</p>
-<p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/70-runtime2.png-small" alt="循环方式运行时间"></p>
-<h2 id="性能分析">性能分析</h2><p>理论上循环是比递归快的，因为同样是线性时间复杂度，递归调用需要频繁的进行栈操作，而循环不需要。</p>
+<h1 id="Analysis">Analysis</h1><h2 id="Idea_1">Idea 1</h2><p>When I saw this problem, my first thought was to go through all of the prices and find the min and max in O(n) time and compute the maximum profit with (max - min).</p>
+<p>However, this idea is wrong. Let’s see the following graph.</p>
+<p><img src="http://7xnlp7.com1.z0.glb.clouddn.com/121-stock%20prices.png-small" alt="sotck prices"></p>
+<p>The min and max of this sotck price graph is min2 and max1. But (max1 - min2) is not what we want since we can’t sell a stock before buy it(max1 is before min2).</p>
+<h2 id="Idea_2">Idea 2</h2><p>Then I try to solve it using Dynamic Programming.</p>
+<p>Let OPT(i, k) denotes the maximum we get at day k if we buy the stock at day i.</p>
+<p>Let $P_i$ denotes the price of stock at day i.</p>
+<p>Let optTal denotes the maximum we get.</p>
+<p>Then we have:</p>
+
+$
+OPT(i, k) = 
+\begin{cases}
+	OPT(i, k - 1) & \text{not sell at day k} \\ 
+	P_k - P_i & \text{sell at day k}
+\end{cases}
+$
+
+<p>and the optimal:</p>
+
+$
+\begin{align}
+	optTotal = max\{OPT(i, j)\} \\
+	1 \le i \le n \\
+	i \le j \le n 
+\end{align}
+$
+
+<p>With this formula, we can calculate the correct answer in $O(n^2)$ time.</p>
+<p>However, this solution is not efficient and will exceed the time limit of LeetcodeOJ.</p>
+<h2 id="Idea_3">Idea 3</h2><p>We can go through all of the prices and update the min. Compute the profit we can get at day i by calculate ($P_i$ - min), update the max if we get a higher profit.</p>
+<p>The complexity is O(n).</p>
+<p>This solution works great!</p>
+<h1 id="Solution">Solution</h1><h2 id="Dynamic_Programming_Version_1(not_good)">Dynamic Programming Version 1(not good)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; prices</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> * Brute force version with complextity of O(n^2).</span><br><span class="line"> * NOTICE!: Will exceed time limt.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfit = <span class="function"><span class="keyword">function</span>(<span class="params">prices</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> length = prices.length,</span><br><span class="line">        opt = [],</span><br><span class="line">        optBuyAtI = [];</span><br><span class="line">        optTotal = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (length === <span class="number">0</span> || length == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        opt[i] = [];</span><br><span class="line">        opt[i][i] = <span class="built_in">Math</span>.max(prices[i] - prices[i - <span class="number">1</span>], <span class="number">0</span>);</span><br><span class="line">        optBuyAtI[i] = opt[i][i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt;= length - <span class="number">1</span>; j++) &#123;</span><br><span class="line">            opt[i][j] = <span class="built_in">Math</span>.max(opt[i][j - <span class="number">1</span>], prices[j] - prices[i]);</span><br><span class="line">            optBuyAtI[i] = <span class="built_in">Math</span>.max(opt[i][j], optBuyAtI[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        optTotal = <span class="built_in">Math</span>.max(optBuyAtI[i], optTotal);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> optTotal;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Dynamic_Programming_Version_2_(good)">Dynamic Programming Version 2 (good)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; prices</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> * More like greedy. Reserve the partial optimal and replace it when</span><br><span class="line"> * a better result is found.</span><br><span class="line"> * With complextity of O(n)</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfit = <span class="function"><span class="keyword">function</span> (<span class="params">prices</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> length = prices.length,</span><br><span class="line">        min = <span class="literal">Infinity</span>,</span><br><span class="line">        res = -<span class="literal">Infinity</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (prices[i] &lt; min) &#123;</span><br><span class="line">            min = prices[i];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (prices[i] &gt; min &amp;&amp; prices[i] - min &gt; res) &#123;</span><br><span class="line">            res = prices[i] - min;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isFinite</span>(res)) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -268,13 +293,11 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/leetcode-198-house-robber/" rel="prev">Leetcode #198 House Robber</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/hackerrank-funky-rolodex/" rel="next">Percolate Coding Challenge - Funky Rolodex</a>
+              <a href="/2015/leetcode-in-js-213-house-robber-II/" rel="next">Leetcode In JS #213 House Robber II</a>
             
           </div>
         </div>
@@ -300,8 +323,8 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
             
               <div class="comments" id="comments">
                 
-                  <div class="ds-thread" data-thread-key="2015/leetcode-70-climb-stairs/"
-                       data-title="Leetcode #70 Climb Stairs" data-url="http://1mhz.me/2015/leetcode-70-climb-stairs/">
+                  <div class="ds-thread" data-thread-key="2015/leetcode-in-js-121-best-time-to-buy-and-sell-stock/"
+                       data-title="Leetcode In JS #121 Best Time To Buy And Sell Stock" data-url="http://1mhz.me/2015/leetcode-in-js-121-best-time-to-buy-and-sell-stock/">
                   </div>
                 
               </div>
@@ -341,7 +364,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -400,7 +423,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem_Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Analysis"><span class="nav-number">2.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution_1_Recusive_Version"><span class="nav-number">3.1.</span> <span class="nav-text">Solution 1 Recusive Version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution_2_Loop_Version"><span class="nav-number">3.2.</span> <span class="nav-text">Solution 2 Loop Version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能分析"><span class="nav-number">3.3.</span> <span class="nav-text">性能分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problem_Description"><span class="nav-number">1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Analysis"><span class="nav-number">2.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea_1"><span class="nav-number">2.1.</span> <span class="nav-text">Idea 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea_2"><span class="nav-number">2.2.</span> <span class="nav-text">Idea 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea_3"><span class="nav-number">2.3.</span> <span class="nav-text">Idea 3</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic_Programming_Version_1(not_good)"><span class="nav-number">3.1.</span> <span class="nav-text">Dynamic Programming Version 1(not good)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic_Programming_Version_2_(good)"><span class="nav-number">3.2.</span> <span class="nav-text">Dynamic Programming Version 2 (good)</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -656,6 +679,27 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
     });
 </script>
 
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 

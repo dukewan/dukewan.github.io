@@ -38,18 +38,18 @@
 
 
 <meta name="description" content="Problem Description
-After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place">
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode #213 House Robber II">
-<meta property="og:url" content="http://1mhz.me/2015/leetcode-213-house-robber-II/index.html">
+<meta property="og:title" content="Leetcode In JS #198 House Robber">
+<meta property="og:url" content="http://1mhz.me/2015/leetcode-in-js-198-house-robber/index.html">
 <meta property="og:site_name" content="Yizhao He's Notes">
 <meta property="og:description" content="Problem Description
-After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place">
-<meta property="og:updated_time" content="2015-10-20T18:02:06.000Z">
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is">
+<meta property="og:updated_time" content="2015-10-21T17:54:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode #213 House Robber II">
+<meta name="twitter:title" content="Leetcode In JS #198 House Robber">
 <meta name="twitter:description" content="Problem Description
-After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place">
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -59,7 +59,7 @@ After robbing those houses on that street, the thief has found himself a new pla
   };
 </script>
 
-    <title> Leetcode #213 House Robber II // Yizhao He's Notes </title>
+    <title> Leetcode In JS #198 House Robber // Yizhao He's Notes </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -180,7 +180,7 @@ After robbing those houses on that street, the thief has found himself a new pla
           
           
             
-              Leetcode #213 House Robber II
+              Leetcode In JS #198 House Robber
             
           
         </h1>
@@ -189,8 +189,8 @@ After robbing those houses on that street, the thief has found himself a new pla
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-10-20T10:32:12-07:00" content="2015-10-20">
-            2015-10-20
+          <time itemprop="dateCreated" datetime="2015-10-17T17:37:28-07:00" content="2015-10-17">
+            2015-10-17
           </time>
         </span>
 
@@ -211,8 +211,8 @@ After robbing those houses on that street, the thief has found himself a new pla
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/leetcode-213-house-robber-II/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/leetcode-213-house-robber-II/" itemprop="commentsCount"></span>
+              <a href="/2015/leetcode-in-js-198-house-robber/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/leetcode-in-js-198-house-robber/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -227,34 +227,25 @@ After robbing those houses on that street, the thief has found himself a new pla
 
       
         <span itemprop="articleBody"><h1 id="Problem_Description">Problem Description</h1><blockquote>
-<p>After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.</p>
-<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight <strong>without alerting the police</strong>.</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="Analysis">Analysis</h1><p>Dynamic Programming problem.</p>
-<p>Since the houses are arranged in circle, we should take the first house and the last house specially. Because if we rob the first one, we can’t rob the last one since it’s the neighbor of the first one.</p>
-<p>So there are only two special cases:</p>
-<ol>
-<li>rob the first one, don’t rob the last one</li>
-<li>rob the last one, don’t rob the first one</li>
-</ol>
-<p>For case 1, the problem turns into a #198 House Robber problem of 1 … n-1 houses.</p>
-<p>For case 2, the problem turns into a #198 House Robber problem of 2 … n houses.</p>
-<p>Compute the maximum amount of both cases and return the larger one.</p>
-<h2 id="Recursive_Formula">Recursive Formula</h2><p>For n houses, let OPT(n) denotes the maximum amount we can rob, let Vi denotes the money that the ith house holds. </p>
+<h2 id="Recursive_Formula">Recursive Formula</h2><p>For n houses, let OPT(n) denotes the maximum amount we can rob, let Vi denotes the money that the ith house holds.</p>
 <p>For the nth house, we have two cases, rob or not rob.</p>
 <ol>
 <li>rob： OPT(n) = Vn + OPT(n - 2)</li>
 <li>not rob： OPT(n) = OPT(n - 1)</li>
 </ol>
-<p>It means that if we rob the nth house, we can only rob the (n-2)th house next, if we don’t rob the nth house, then we can rob the (n-1)th house next. </p>
+<p>It means that if we rob the nth house, we can only rob the (n-2)th house next, if we don’t rob the nth house, then we can rob the (n-1)th house next.</p>
 <h2 id="Initialization">Initialization</h2><p>n means the total number of houses.</p>
 <ol>
 <li>n = 0，total amount we can rob is 0</li>
 <li>n = 1，total amount equals to the money the first house holds</li>
 <li>n = 2，total amount equals to the larger amount of the first and the second house holds</li>
 </ol>
-<h1 id="Solution">Solution</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span></span><br><span class="line">var rob = function(nums) &#123;</span><br><span class="line">	var length = nums.length;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (length == <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	var opt1 = [],</span><br><span class="line">		opt2 = [];</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 1 to n-1</span></span><br><span class="line">	opt1[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">	opt1[<span class="number">1</span>] = Math.max(nums[<span class="number">0</span>], nums[<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">for</span> (var i = <span class="number">2</span>; i &lt;= length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">		opt1[i] = Math.max(nums[i] + opt1[i - <span class="number">2</span>], opt1[i - <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2 to n</span></span><br><span class="line">	opt2[<span class="number">1</span>] = nums[<span class="number">1</span>];</span><br><span class="line">	opt2[<span class="number">2</span>] = Math.max(nums[<span class="number">1</span>], nums[<span class="number">2</span>]);</span><br><span class="line">	<span class="keyword">for</span> (var j = <span class="number">3</span>; j &lt;= length - <span class="number">1</span>; j++) &#123;</span><br><span class="line">		opt2[j] = Math.max(nums[j] + opt2[j - <span class="number">2</span>], opt2[j - <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> Math.max(opt1[length - <span class="number">2</span>], opt2[length - <span class="number">1</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Solution">Solution</h1><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * <span class="constant">@param</span> &#123;<span class="built_in">number</span>[]&#125; nums</span><br><span class="line"> * <span class="constant">@return</span> &#123;<span class="built_in">number</span>&#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">function rob(nums) &#123;</span><br><span class="line">    var length = nums.length<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (length == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">0</span>]<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var <span class="built_in">opt</span> = []<span class="comment">;</span></span><br><span class="line">    <span class="built_in">opt</span>[<span class="number">0</span>] = nums[<span class="number">0</span>],</span><br><span class="line">    <span class="built_in">opt</span>[<span class="number">1</span>] = Math.<span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (var i = <span class="number">2</span><span class="comment">; i &lt; length; i++) &#123;</span></span><br><span class="line">        <span class="built_in">opt</span>[i] = Math.<span class="built_in">max</span>(nums[i] + <span class="built_in">opt</span>[i - <span class="number">2</span>], <span class="built_in">opt</span>[i - <span class="number">1</span>])<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">opt</span>[length - <span class="number">1</span>]<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -278,11 +269,13 @@ After robbing those houses on that street, the thief has found himself a new pla
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2015/hexo-deploy-case-sensitive/" rel="prev">Hexo 部署到 Github Pages 文件夹大小写问题</a>
+            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/hexo-deploy-case-sensitive/" rel="next">Hexo 部署到 Github Pages 文件夹大小写问题</a>
+              <a href="/2015/leetcode-in-js-70-climb-stairs/" rel="next">Leetcode In JS #70 Climb Stairs</a>
             
           </div>
         </div>
@@ -308,8 +301,8 @@ After robbing those houses on that street, the thief has found himself a new pla
             
               <div class="comments" id="comments">
                 
-                  <div class="ds-thread" data-thread-key="2015/leetcode-213-house-robber-II/"
-                       data-title="Leetcode #213 House Robber II" data-url="http://1mhz.me/2015/leetcode-213-house-robber-II/">
+                  <div class="ds-thread" data-thread-key="2015/leetcode-in-js-198-house-robber/"
+                       data-title="Leetcode In JS #198 House Robber" data-url="http://1mhz.me/2015/leetcode-in-js-198-house-robber/">
                   </div>
                 
               </div>
@@ -349,7 +342,7 @@ After robbing those houses on that street, the thief has found himself a new pla
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -664,6 +657,27 @@ After robbing those houses on that street, the thief has found himself a new pla
     });
 </script>
 
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
