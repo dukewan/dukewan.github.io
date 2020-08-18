@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Canvas photo editor demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+    href="assets/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="assets/apple-touch-icon-180x180.png">
+  <style>
+    .editor {
+      width: 100%;
+    }
+
+    .action {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .stack {
+      margin-bottom: 20px;
+    }
+
+    #demo {
+      border: 1px solid gray;
+      background-color: #fff;
+    }
+
+    .footer {
+      position: sticky;
+      bottom: 0px;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    #config {
+      display: flex;
+      justify-content: center;
+    }
+
+    #tools {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    #tools>div {
+      flex-basis: 40px;
+      font-size: 24px;
+      align-items: center;
+      text-align: center;
+      border-radius: 3px;
+      display: flex;
+      justify-content: center;
+    }
+
+    #tools>div.selected {
+      background-color: #D2D4D6;
+    }
+
+    #diameter-config {
+      display: none;
+    }
+
+    #diameter-bubble {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid gray;
+    }
+
+    .diameter-inner {
+      border-radius: 50%;
+      background-color: black;
+    }
+
+    #color-config {
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #color-config .color {
+      margin: 0 4px;
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      border: 1px solid gray;
+    }
+
+    #color-display {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      border: 1px solid gray;
+    }
+
+    #text-config-container {
+      display: none;
+    }
+
+    #text-confirm {
+      display: none;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="editor">
+    <div class="action">
+      <div class="stack">
+        <input type="file" accept="image/*" id="choose-file" />
+      </div>
+      <div class="destination">
+        <button class="undo" id="undo">Undo</button>
+        <button class="redo" id="redo">Redo</button>
+        <button class="clear" id="clear">Clear</button>
+        <button class="save" id="save">Save</button>
+      </div>
+    </div>
+    <canvas id="demo" width="600px" height="400px"></canvas>
+    <div class="footer">
+      <div id="config">
+        <input type="range" min="2" max="10" value="2" id="diameter-config" />
+        <div id="color-config">
+          <div class="color" style="background-color: #ffffff;"
+            data-color="#ffffff">
+          </div>
+          <div class="color" style="background-color: #000000;"
+            data-color="#000000">
+          </div>
+          <div class="color" style="background-color: red;" data-color="red">
+          </div>
+          <div class="color" style="background-color: #FFF95A;"
+            data-color="#FFF95A">
+          </div>
+          <div class="color" style="background-color: #51BC42;"
+            data-color="#51BC42">
+          </div>
+          <div class="color" style="background-color: #4FC1FA;"
+            data-color="#4FC1FA">
+          </div>
+          <div class="color" style="background-color: #1F4DBB;"
+            data-color="#1F4DBB">
+          </div>
+        </div>
+        <div id="text-config-container">
+          <input type="text" placeholder="Type something new"
+            id="text-config" />
+          <button id="text-confirm">Confirm position</button>
+        </div>
+      </div>
+      <div id="tools">
+        <div class="arrow selected" data-tool="arrow">↖️</div>
+        <div class="rectangle" data-tool="rectangle">🔲</div>
+        <div class="ellipsis" data-tool="ellipsis">⭕</div>
+        <div class="pen" data-tool="pen">🖊️</div>
+        <div class="text" data-tool="text">🇦</div>
+        <div class="mosaic" data-tool="mosaic">👀</div>
+        <div class="color" data-tool="color">
+          <div style="background-color: red;" id="color-display">
+          </div>
+        </div>
+        <div class="diameter" data-tool="diameter">
+          <div id="diameter-bubble">
+            <div class="diameter-inner" style="width: 2px;height: 2px;"
+              id="diameter-display">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
