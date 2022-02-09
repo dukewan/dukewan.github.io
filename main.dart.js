@@ -52131,7 +52131,7 @@ $0(){var s,r=this.a
 r.e=r.d[this.b]
 s=r.f
 s.xb(B.cf)
-s.mJ(0,r.e.c,!0)
+s.mJ(0,"assets/"+r.e.c,!0)
 r.r=!0},
 $S:0}
 A.Zw.prototype={
@@ -52140,7 +52140,7 @@ s.r=r
 if(!s.x){s.x=!0
 r=s.f
 r.xb(B.cf)
-r.mJ(0,s.e.c,!0)
+r.mJ(0,"assets/"+s.e.c,!0)
 return}s=s.f
 if(r)s.h7(0)
 else s.mG(0)},
